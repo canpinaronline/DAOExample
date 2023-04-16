@@ -1,16 +1,21 @@
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-       CustomerDAO customerDAO = new CustomerDAOImplementation();
-       Customer customer = new Customer(1,167347,"Test username", "Cuz");
-       customerDAO.update(customer);
+      List<Customer> customers;
+      CustomerDAO customerDAO = new CustomerDAOImplementation();
+      customers = customerDAO.getAll();
 
-       System.out.println(customer);
+      for(Customer customer : customers) {
+          System.out.println(customer);
+      }
+
+
 
     }
 }

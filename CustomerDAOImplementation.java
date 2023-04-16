@@ -1,7 +1,5 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDAOImplementation implements CustomerDAO{
@@ -30,7 +28,25 @@ public class CustomerDAOImplementation implements CustomerDAO{
 
     @Override
     public List<Customer> getAll() throws SQLException {
-        return null;
+        Connection con = Database.getConnection();
+        String preparedSQL = "SELECT * FROM customer";
+        List<Customer> customers = new ArrayList<>();
+
+        Statement st = con.createStatement();
+
+        ResultSet rs = st.executeQuery(preparedSQL);
+
+        while(rs.next()) {
+            int id = rs.getInt("id");
+            int customerId = rs.getInt("customer_id");
+            String firstName = rs.getString("first_name");
+            String lastName = rs.getString("last_name");
+
+            Customer customer = new Customer(id,customerId,firstName,lastName);
+            customers.add(customer);
+        }
+
+        return customers;
     }
 
     @Override

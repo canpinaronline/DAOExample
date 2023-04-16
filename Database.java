@@ -2,9 +2,9 @@ import java.sql.*;
 
 public class Database {
 
-    private final static String URL = "jdbc:mysql://localhost:3306/dao_example";
-    private final static String USERNAME = "newuser";
-    private final static String PASSWORD = "newuser";
+    private static String url = "jdbc:mysql://localhost:3306/dao_example";
+    private static String username = "newuser";
+    private static String password = "newuser";
 
     private Database() {
 
@@ -12,7 +12,7 @@ public class Database {
 
     public static Connection getConnection() throws SQLException {
         Connection connection = null;
-        connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+        connection = DriverManager.getConnection(url,username,password);
 
         return connection;
     }
