@@ -58,7 +58,22 @@ public class CustomerDAOImplementation implements CustomerDAO{
 
     @Override
     public int update(Customer customer) throws SQLException {
-        return 0;
+        Connection con = Database.getConnection();
+
+        String preparedSQL = "UPDATE customer SET customer_id = ?, first_name = ?, last_name = ? WHERE id=?";
+        PreparedStatement ps = con.prepareStatement(preparedSQL);
+
+        ps.setInt(1,customer.getCustomerId());
+        ps.setString(2,customer.getFirstName());
+        ps.setString(3,customer.getLastName());
+        ps.setInt(4,customer.getId());
+
+        int result = ps.executeUpdate();
+
+        Database.closePreparedStatement(ps);
+        Database.closeConnection(con);
+
+        return result;
     }
 
     @Override

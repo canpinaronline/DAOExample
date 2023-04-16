@@ -49,6 +49,7 @@ public class Customer {
                 "id=" + id +
                 ", customerId=" + customerId +
                 ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 '}';
     }
 }
