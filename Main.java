@@ -7,13 +7,12 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-      List<Customer> customers;
       CustomerDAO customerDAO = new CustomerDAOImplementation();
-      customers = customerDAO.getAll();
 
-      for(Customer customer : customers) {
-          System.out.println(customer);
-      }
+      Customer customer = customerDAO.get(1);
+      
+      int result = customerDAO.delete(customer);
+
 
 
 

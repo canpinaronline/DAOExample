@@ -14,6 +14,6 @@ public interface DAO<T> {
 
     int update(T t) throws SQLException;
 
-    int delete(T t);
+    int delete(T t) throws SQLException;
 
 }

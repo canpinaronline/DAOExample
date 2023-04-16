@@ -93,7 +93,17 @@ public class CustomerDAOImplementation implements CustomerDAO{
     }
 
     @Override
-    public int delete(Customer customer) {
-        return 0;
+    public int delete(Customer customer) throws SQLException {
+        Connection con = Database.getConnection();
+        String preparedSQL = "DELETE FROM customer WHERE id=?";
+        PreparedStatement ps = con.prepareStatement(preparedSQL);
+
+        ps.setInt(1,customer.getId());
+
+        int result = ps.executeUpdate();
+
+        Database.closePreparedStatement(ps);
+        Database.closeConnection(con);
+        return result;
     }
 }
