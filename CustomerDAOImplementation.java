@@ -40,7 +40,20 @@ public class CustomerDAOImplementation implements CustomerDAO{
 
     @Override
     public int insert(Customer customer) throws SQLException {
-        return 0;
+        Connection con = Database.getConnection();
+        String preparedSQL = "INSERT INTO customer (customer_id, first_name, last_name) VALUES(?,?,?)";
+
+        PreparedStatement ps = con.prepareStatement(preparedSQL);
+        ps.setInt(1,customer.getCustomerId());
+        ps.setString(2,customer.getFirstName());
+        ps.setString(3,customer.getLastName());
+
+        /* Returns: x rows affected. x is number of records that were affected.*/
+        int result = ps.executeUpdate();
+
+        Database.closePreparedStatement(ps);
+        Database.closeConnection(con);
+        return result;
     }
 
     @Override

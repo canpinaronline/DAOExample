@@ -7,8 +7,11 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         CustomerDAO customerDAO = new CustomerDAOImplementation();
-        /* Get user who is id=1 in DB*/
-        System.out.println(customerDAO.get(1));
+        /* ID is 0 -> Id provided by the database (auto-increment) */
+        Customer customer = new Customer(0,865432,"Cherry","Berries");
+        int affectedRows = customerDAO.insert(customer);
+        /* Returns x record inserted into our database into the customer table*/
+        System.out.println(affectedRows);
 
     }
 }
