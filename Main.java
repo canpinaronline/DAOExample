@@ -6,11 +6,9 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        Connection con = Database.getConnection();
-
-        if(con != null) {
-            System.out.println("Success");
-        }
+        CustomerDAO customerDAO = new CustomerDAOImplementation();
+        /* Get user who is id=1 in DB*/
+        System.out.println(customerDAO.get(1));
 
     }
 }

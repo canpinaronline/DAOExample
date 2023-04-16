@@ -1,10 +1,31 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 public class CustomerDAOImplementation implements CustomerDAO{
     @Override
     public Customer get(int id) throws SQLException {
-        return null;
+        Connection con = Database.getConnection();
+        Customer customer = null;
+        String preparedSQL = "SELECT id, customer_id, first_name, last_name FROM customer WHERE id=?";
+        PreparedStatement ps = con.prepareStatement(preparedSQL);
+        ps.setInt(1,id);
+
+        ResultSet rs = ps.executeQuery();
+
+        /* If we have record in DB*/
+        if(rs.next()) {
+            int dbId = rs.getInt("id");
+            int customerId = rs.getInt("customer_id");
+            String customerName = rs.getString("first_name");
+            String customerLastname = rs.getString("last_name");
+
+            /* Init values to customer object and return it.*/
+            customer = new Customer(dbId,customerId,customerName,customerLastname);
+        }
+        return customer;
     }
 
     @Override
